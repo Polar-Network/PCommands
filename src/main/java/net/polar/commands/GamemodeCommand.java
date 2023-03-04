@@ -1,7 +1,10 @@
 package net.polar.commands;
 
 import net.minestom.server.command.builder.Command;
+import net.minestom.server.command.builder.arguments.ArgumentType;
+import net.minestom.server.command.builder.arguments.minecraft.ArgumentEntity;
 import net.minestom.server.entity.GameMode;
+import net.minestom.server.entity.Player;
 import net.polar.utils.ChatColor;
 
 public final class GamemodeCommand extends Command {
@@ -29,6 +32,15 @@ public final class GamemodeCommand extends Command {
                         (player) -> player.setGameMode(GameMode.SURVIVAL),
                         "pcommands.gamemode.*", "pcommands.gamemode.survival");
             });
+
+            ArgumentEntity target = ArgumentType.Entity("target").onlyPlayers(true);
+            addSyntax((sender, context) -> {
+                Player player = context.get(target).findFirstPlayer(sender);
+                if (!Actions.invalidPlayer(sender, player)) {
+                    player.setGameMode(GameMode.SURVIVAL);
+                }
+            });
+
         }
     }
 
@@ -41,6 +53,14 @@ public final class GamemodeCommand extends Command {
                         sender,
                         (player) -> player.setGameMode(GameMode.CREATIVE),
                         "pcommands.gamemode.*", "pcommands.gamemode.creative");
+            });
+
+            ArgumentEntity target = ArgumentType.Entity("target").onlyPlayers(true);
+            addSyntax((sender, context) -> {
+                Player player = context.get(target).findFirstPlayer(sender);
+                if (!Actions.invalidPlayer(sender, player)) {
+                    player.setGameMode(GameMode.CREATIVE);
+                }
             });
         }
     }
@@ -55,6 +75,14 @@ public final class GamemodeCommand extends Command {
                         (player) -> player.setGameMode(GameMode.ADVENTURE),
                         "pcommands.gamemode.*", "pcommands.gamemode.adventure");
             });
+
+            ArgumentEntity target = ArgumentType.Entity("target").onlyPlayers(true);
+            addSyntax((sender, context) -> {
+                Player player = context.get(target).findFirstPlayer(sender);
+                if (!Actions.invalidPlayer(sender, player)) {
+                    player.setGameMode(GameMode.ADVENTURE);
+                }
+            });
         }
     }
 
@@ -67,6 +95,14 @@ public final class GamemodeCommand extends Command {
                         sender,
                         (player) -> player.setGameMode(GameMode.SPECTATOR),
                         "pcommands.gamemode.*", "pcommands.gamemode.spectator");
+            });
+
+            ArgumentEntity target = ArgumentType.Entity("target").onlyPlayers(true);
+            addSyntax((sender, context) -> {
+                Player player = context.get(target).findFirstPlayer(sender);
+                if (!Actions.invalidPlayer(sender, player)) {
+                    player.setGameMode(GameMode.SPECTATOR);
+                }
             });
         }
     }
