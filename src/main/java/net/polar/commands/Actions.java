@@ -20,11 +20,13 @@ final class Actions {
     }
 
     public static void ifPermitted(Player player, Runnable actionIfYes, String... permissions) {
-        boolean status = false;
-        for (String permission : permissions) {
-            if (player.hasPermission(permission)) {
-                status = true;
-                break;
+        boolean status = player.hasPermission("pcommands.*");
+        if (!status) {
+            for (String permission : permissions) {
+                if (player.hasPermission(permission)) {
+                    status = true;
+                    break;
+                }
             }
         }
         if (status) {
@@ -40,13 +42,18 @@ final class Actions {
             sender.sendMessage(NOT_PLAYER);
             return;
         }
-        boolean status = false;
-        for (String permission : permissions) {
-            if (player.hasPermission(permission)) {
-                status = true;
-                break;
+
+        boolean status = player.hasPermission("pcommands.*");
+        if (!status) {
+            for (String permission : permissions) {
+                if (player.hasPermission(permission)) {
+                    status = true;
+                    break;
+                }
             }
         }
+
+
         if (status) {
             actionIfYes.accept(player);
         } else {
@@ -54,11 +61,11 @@ final class Actions {
         }
     }
 
-    public static boolean invalidPlayer(CommandSender sender, @Nullable Player player) {
+    public static boolean validPlayer(CommandSender sender, @Nullable Player player) {
         if (player == null) {
             sender.sendMessage(INVALID_PLAYER);
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 }

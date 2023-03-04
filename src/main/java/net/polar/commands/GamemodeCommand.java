@@ -36,7 +36,7 @@ public final class GamemodeCommand extends Command {
             ArgumentEntity target = ArgumentType.Entity("target").onlyPlayers(true);
             addSyntax((sender, context) -> {
                 Player player = context.get(target).findFirstPlayer(sender);
-                if (!Actions.invalidPlayer(sender, player)) {
+                if (Actions.validPlayer(sender, player)) {
                     player.setGameMode(GameMode.SURVIVAL);
                 }
             });
@@ -58,7 +58,7 @@ public final class GamemodeCommand extends Command {
             ArgumentEntity target = ArgumentType.Entity("target").onlyPlayers(true);
             addSyntax((sender, context) -> {
                 Player player = context.get(target).findFirstPlayer(sender);
-                if (!Actions.invalidPlayer(sender, player)) {
+                if (Actions.validPlayer(sender, player)) {
                     player.setGameMode(GameMode.CREATIVE);
                 }
             });
@@ -79,7 +79,7 @@ public final class GamemodeCommand extends Command {
             ArgumentEntity target = ArgumentType.Entity("target").onlyPlayers(true);
             addSyntax((sender, context) -> {
                 Player player = context.get(target).findFirstPlayer(sender);
-                if (!Actions.invalidPlayer(sender, player)) {
+                if (Actions.validPlayer(sender, player)) {
                     player.setGameMode(GameMode.ADVENTURE);
                 }
             });
@@ -100,7 +100,7 @@ public final class GamemodeCommand extends Command {
             ArgumentEntity target = ArgumentType.Entity("target").onlyPlayers(true);
             addSyntax((sender, context) -> {
                 Player player = context.get(target).findFirstPlayer(sender);
-                if (!Actions.invalidPlayer(sender, player)) {
+                if (Actions.validPlayer(sender, player)) {
                     player.setGameMode(GameMode.SPECTATOR);
                 }
             });

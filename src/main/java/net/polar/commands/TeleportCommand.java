@@ -29,7 +29,7 @@ public final class TeleportCommand extends Command {
             Actions.ifPlayerAndPermitted(sender, player -> {
                 Player p = context.get(toArg).findFirstPlayer(sender);
 
-                if (!Actions.invalidPlayer(sender, p)) player.teleport(p.getPosition());
+                if (Actions.validPlayer(sender, p)) player.teleport(p.getPosition());
             }, "pcommands.teleport");
         }, toArg);
 
@@ -37,7 +37,7 @@ public final class TeleportCommand extends Command {
             Actions.ifPermitted(sender, () -> {
                 Player p1 = context.get(fromArg).findFirstPlayer(sender);
                 Player p2 = context.get(toArg).findFirstPlayer(sender);
-                if (!Actions.invalidPlayer(sender, p1) && !Actions.invalidPlayer(sender, p2)) p1.teleport(p2.getPosition());
+                if (Actions.validPlayer(sender, p1) && Actions.validPlayer(sender, p2)) p1.teleport(p2.getPosition());
 
             }, "pcommands.teleport");
         }, fromArg, toArg);
@@ -45,7 +45,7 @@ public final class TeleportCommand extends Command {
         addSyntax((sender, context) -> {
             Actions.ifPermitted(sender, () -> {
                 Player p = context.get(fromArg).findFirstPlayer(sender);
-                if (!Actions.invalidPlayer(sender, p)) p.teleport(new Pos(context.get(xArg), context.get(yArg), context.get(zArg)));
+                if (Actions.validPlayer(sender, p)) p.teleport(new Pos(context.get(xArg), context.get(yArg), context.get(zArg)));
             }, "pcommands.teleport");
         }, fromArg, xArg, yArg, zArg);
 
